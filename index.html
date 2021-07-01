@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Trivia</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+     </head>
+  <body>
+  <style>
+      *{
+          margin: 0;
+          padding: 0;
+          transition: all 0.3s;
+      }
+      body{
+          background-color: #293250;
+          width: 100vw;
+          height: 100vh;
+          overflow: hidden;
+          font-family: "candara","helvetica";
+      }
+      .iniciar{
+          margin: 40vh auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+      }
+      #jugador{
+          padding: 20px;
+          font-size: 40px;
+          text-align: center;
+          font-family: "calibri","helvetica";
+          font-weight: bold;
+          border: none;
+          border-radius: 50px;
+          margin-bottom: 25px;
+      }
+      .btn-principal{
+          padding: 20px;
+          text-transform: uppercase;
+          font-size: 40px;
+          font-family: "calibri","helvetica";
+          font-weight: bold;
+          margin: 10px;
+          border-radius: 50px;
+          border: none;
+          cursor: pointer;
+          color: #293250;
+          background-color: #ffd55a;
+      }
+      .desaparecer{
+          animation: desaparecer 1s;
+      }
+      @keyframes desaparecer {
+          0%{
+              opacity: 1;
+          }
+          100%{
+              opacity: 0;
+          }
+      }
+      .btn-fixed{
+          padding: 20px;
+          text-transform: uppercase;
+          font-size: 25px;
+          font-family: "calibri","helvetica";
+          font-weight: bold;
+          border-radius: 50px;
+          border: none;
+          cursor: pointer;
+          color: #293250;
+          background-color: #ffd55a;
+          position: fixed;
+          right: 20px;
+          bottom: 20px;
+          display: none;
+      }
+      .cuadro{
+          margin: 50px auto;
+          background-color: white;
+          width: 90vw;
+          height: 90vh;
+          text-align: center;
+          overflow: hidden;
+          position: relative;
+          display: none;
+          animation: arriba 2s;
+      }
+      @keyframes arriba {
+          0%{
+              margin-top: 1500px;
+          }
+          100%{
+              margin-top: 50px;
+          }
+      }
+      @keyframes abajo {
+          0%{
+              margin-top: 50px;
+          }
+          100%{
+              margin-top: 1500px;
+          }
+      }
+      .categoria{
+          position: absolute;
+          top: 10px;
+          left: 30px;
+          font-size: 25px;
+      }
+      .cantidad{
+          position: absolute;
+          top: 10px;
+          right: 30px;
+          font-size: 25px;
+      }
+      .titulo{
+        height: 60%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-direction: column-reverse;
+      }
+      .imagen{
+          width: 300px;
+          height: 250px;
+      }
+      .pregunta{
+        font-size: 40px;
+        width: 80%;
+      }
+      .respuestas{
+        height: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+      }
+      .btn-secundarios{
+          font-size: 25px;
+          background-color: #ffd55a;
+          padding: 10px;
+          width: 80%;
+          cursor: pointer;
+      }
+      .btn-secundarios:hover{
+        width: 90%;
+      }
+      .tabla{
+        margin: 10rem auto;
+        width: 52vw;
+        max-height: 60vh;
+        overflow: auto;
+        justify-content: center;
+        position: relative;
+        display: none;
+      }
+      table{
+        background-color: white;
+        text-align: center;
+        border-collapse: collapse;
+        width: 50vw;
+        margin: auto;
+    }
+ 
+    th, td{
+        padding: 20px;
+    }
+
+    thead{
+        position: sticky;
+        top: 0;
+        background-color: #246355;
+        border-bottom: solid 5px #0F362D;
+        color: white;
+    }
+
+    tr:nth-child(even){
+        background-color: #ddd;
+    }
+
+    tr:hover td{
+        background-color: #369681;
+        color: white;
+    }
+
+  </style>
+    
+    <form class="iniciar">
+        <input type="text" class=""" id="jugador" aria-describedby="helpId" placeholder="Escribe tu nick" autofocus>
+        <input type="submit" class="btn-principal" value="jugar">
+    </form>
+    <button class="btn-fixed">volver</button>
+    <div class="cuadro">
+        
+    </div>
+    <div class="tabla">
+        <table>
+            <thead>
+                <tr>
+                    <th>Jugador</th>
+                    <th>Puntos</th>
+                    <th>Errores</th>
+                    <th>Efectividad</th>
+                    <th>Tiempo</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                
+           
+            </tbody>
+        </table>
+    </div>
+
+<script src="app.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    </body>
+</html>
