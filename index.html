@@ -22,7 +22,7 @@
           font-family: "candara","helvetica";
       }
       .iniciar{
-          margin: 40vh auto;
+          margin: 20vh auto;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -49,6 +49,38 @@
           cursor: pointer;
           color: #293250;
           background-color: #ffd55a;
+      }
+      .categorias{
+          width: 90vw;
+          height: auto;
+          padding: 20px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          margin-bottom: 25px;
+      }
+      label{
+          color: white;
+          padding: 20px;
+          font-size: 45px;
+          text-align: center;
+          font-family: "calibri","helvetica";
+          font-weight: bold;
+          border: none;
+          border-radius: 50px;
+          margin-bottom: 25px;
+      }
+      .btn-noSeleccionado{
+          padding: 15px;
+          text-transform: uppercase;
+          font-size: 20px;
+          font-family: "calibri","helvetica";
+          font-weight: bold;
+          border-radius: 50px;
+          border: none;
+          cursor: pointer;
+          color: #293250;
+          background-color: red;
       }
       .desaparecer{
           animation: desaparecer 1s;
@@ -189,6 +221,17 @@
   </style>
     
     <form class="iniciar">
+        <label for="">Selecciona una categoria</label>
+        <div class="categorias">
+            <button class="btn-noSeleccionado">Arte y literatura</button>
+            <button class="btn-noSeleccionado">Historia</button>
+            <button class="btn-noSeleccionado">Ciencia y técnologia</button>
+            <button class="btn-noSeleccionado">Matemática</button>
+            <button class="btn-noSeleccionado">Geografía</button>
+            <button class="btn-noSeleccionado">Deportes</button>
+            <button class="btn-noSeleccionado">Entretenimiento</button>
+            <button class="btn-noSeleccionado">Todo</button>
+        </div>
         <input type="text" class=""" id="jugador" aria-describedby="helpId" placeholder="Escribe tu nick" autofocus>
         <input type="submit" class="btn-principal" value="jugar">
     </form>

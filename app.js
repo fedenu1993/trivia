@@ -4,6 +4,7 @@ const botonPrincipal = document.querySelector(".btn-principal");
 const cuadro = document.querySelector(".cuadro");
 const img = document.querySelector(".imagen");
 const form = document.querySelector("form");
+const botonesCat = document.getElementsByClassName("categorias");
 var jugador = document.getElementById("jugador");
 var cantidadRespondidas = 1;
 var puntos;
@@ -156,6 +157,8 @@ botonFixed.addEventListener("click",()=>{
     form.style.display = "flex";
  
 });
+
+
 
 //Tabla de lugares con LocalStorage
 
