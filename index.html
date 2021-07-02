@@ -70,8 +70,9 @@
           border-radius: 50px;
           margin-bottom: 25px;
       }
-      .btn-noSeleccionado{
+      .btn-categoria{
           padding: 15px;
+          margin: 5px;
           text-transform: uppercase;
           font-size: 20px;
           font-family: "calibri","helvetica";
@@ -79,8 +80,17 @@
           border-radius: 50px;
           border: none;
           cursor: pointer;
+      }
+      .btn-noSeleccionado{
+          color: #ffd55a;
+          background-color: #293250;
+          border: 3px solid #ffd55a;
+      }
+      .btn-seleccionado{
           color: #293250;
-          background-color: red;
+          background-color: #ffd55a;
+          border: 3px solid #293250;
+
       }
       .desaparecer{
           animation: desaparecer 1s;
@@ -223,14 +233,14 @@
     <form class="iniciar">
         <label for="">Selecciona una categoria</label>
         <div class="categorias">
-            <button class="btn-noSeleccionado">Arte y literatura</button>
-            <button class="btn-noSeleccionado">Historia</button>
-            <button class="btn-noSeleccionado">Ciencia y técnologia</button>
-            <button class="btn-noSeleccionado">Matemática</button>
-            <button class="btn-noSeleccionado">Geografía</button>
-            <button class="btn-noSeleccionado">Deportes</button>
-            <button class="btn-noSeleccionado">Entretenimiento</button>
-            <button class="btn-noSeleccionado">Todo</button>
+            <h3 class="btn-categoria btn-noSeleccionado">Arte y literatura</h3>
+            <h3 class="btn-categoria btn-noSeleccionado">Historia</h3>
+            <h3 class="btn-categoria btn-noSeleccionado">Ciencia y técnologia</h3>
+            <h3 class="btn-categoria btn-noSeleccionado">Matemática</h3>
+            <h3 class="btn-categoria btn-noSeleccionado">Geografía</h3>
+            <h3 class="btn-categoria btn-noSeleccionado">Deportes</h3>
+            <h3 class="btn-categoria btn-noSeleccionado">Entretenimiento</h3>
+            <h3 id="todo" class="btn-categoria btn-seleccionado">Todo</h3>
         </div>
         <input type="text" class=""" id="jugador" aria-describedby="helpId" placeholder="Escribe tu nick" autofocus>
         <input type="submit" class="btn-principal" value="jugar">
@@ -244,6 +254,7 @@
             <thead>
                 <tr>
                     <th>Jugador</th>
+                    <th>Categoria</th>
                     <th>Puntos</th>
                     <th>Errores</th>
                     <th>Efectividad</th>

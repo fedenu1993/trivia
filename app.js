@@ -4,15 +4,14 @@ const botonPrincipal = document.querySelector(".btn-principal");
 const cuadro = document.querySelector(".cuadro");
 const img = document.querySelector(".imagen");
 const form = document.querySelector("form");
-const botonesCat = document.getElementsByClassName("categorias");
+const botonesCat = document.querySelectorAll(".btn-categoria");
+var categoriaSeleccionada = "Todo";
 var jugador = document.getElementById("jugador");
 var cantidadRespondidas = 1;
 var puntos;
 var errores;
 const tabla = document.querySelector(".tabla");
 const botonFixed = document.querySelector(".btn-fixed");
-
-
 
 //Funciones
 
@@ -52,9 +51,12 @@ function ajax(){
     }
     xhr.open("GET","base.json",false);
     xhr.send();
-    return datos;
+    if(categoriaSeleccionada === "Todo"){
+        return datos;
+    }else{
+        return datos.filter(element=>element.categoria === categoriaSeleccionada);
+    }
 };
-
 function preguntaAleatoria(){
     const json = ajax();
     let indice = Math.floor(Math.random()*(json.length-0)-0);
@@ -70,12 +72,19 @@ function cargarPregunta(){
         estructuraCuadro(info.categoria, info.pregunta, info.imagen, respuestas,cantidadRespondidas);
     }
 }
+//Evita que se puedan elegir mas de una opcion por pregunta
+let suspender_botones = false
 
 function btn(n){
+    if(suspender_botones){
+        return
+    }
+    suspender_botones = true;
     if(respuestas[n] == info.respuesta){
         btnCorrecto = document.getElementById(`btn${n+1}`);
         btnCorrecto.style.background = "#6dd47e";
         setTimeout(()=>{
+            suspender_botones = false
             cargarPregunta();
         },1000);
         puntos++;
@@ -90,6 +99,7 @@ function btn(n){
                     btnCorrecto.style.background = "#6dd47e";
                 },500);
                 setTimeout(()=>{
+                    suspender_botones = false
                     cargarPregunta();
                 },1000);
             }
@@ -110,7 +120,7 @@ function btn(n){
         tiempo = parseInt((horaFinal.getTime()-horaInicio.getTime())/1000);
         puntosRealizados = puntos;
         erroresRealizados = errores;
-        crearJugador(nombre,puntosRealizados,erroresRealizados,tiempo);
+        crearJugador(nombre,categoriaSeleccionada,puntosRealizados,erroresRealizados,tiempo);
         guardarDB();
         cargarTablaDB();
     }
@@ -155,9 +165,27 @@ botonFixed.addEventListener("click",()=>{
     botonFixed.style.display = "none";
     form.classList.remove("desaparecer");
     form.style.display = "flex";
- 
+    for(let j = 0; j <botonesCat.length; j++){
+        botonesCat[j].classList.remove("btn-seleccionado");
+        botonesCat[j].classList.add("btn-noSeleccionado");
+    }
+    document.getElementById("todo").classList.add("btn-seleccionado");
+    categoriaSeleccionada = "Todo";
+    suspender_botones = false
 });
 
+for(let i = 0;i < botonesCat.length; i++){
+    botonesCat[i].addEventListener("click",(e)=>{
+        e.preventDefault();
+        for(let j = 0; j <botonesCat.length; j++){
+            botonesCat[j].classList.remove("btn-seleccionado");
+            botonesCat[j].classList.add("btn-noSeleccionado");
+        }
+        botonesCat[i].classList.remove("btn-noSeleccionado");
+        botonesCat[i].classList.add("btn-seleccionado");
+        categoriaSeleccionada = document.querySelector(".btn-seleccionado").innerHTML;
+    })
+}
 
 
 //Tabla de lugares con LocalStorage
@@ -169,13 +197,14 @@ var tiempo;
 var arrayJugadores = [];
 
 
-const crearJugador = (nombre,puntos,errores,tiempo) => {
+const crearJugador = (nombre,categoria,puntos,errores,tiempo) => {
 
     const fecha = new Date();
     const fechaFormateada = fecha.toLocaleDateString();
 
     usuario = {
         nombre: nombre,
+        categoria: categoria,
         puntos: puntos,
         errores: errores,
         tiempo: tiempo,
@@ -219,7 +248,8 @@ const cargarTablaDB = () => {
             arrayJugadores.forEach(element => {
                 tabla.innerHTML+=
                 `<tr>
-                <td scope="row">${element.nombre}</td>
+                <td>${element.nombre}</td>
+                <td>${element.categoria}</td>
                 <td>${element.puntos}</td>
                 <td>${element.errores}</td>
                 <td>${element.puntos / 20 * 100} %</td>
